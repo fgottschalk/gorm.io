@@ -5,7 +5,7 @@ layout: page
 
 ## Delete a Record
 
-When deleting a record, the deleted value needs to have primary key or it will trigger a [Batch Delete](#batch_delete), for example:
+When deleting a record, the deleted value needs to have a primary key or it will trigger a [Batch Delete](#batch_delete), for example:
 
 ```go
 // Email's ID is `10`
@@ -47,7 +47,7 @@ func (u *User) BeforeDelete(tx *gorm.DB) (err error) {
 
 ## <span id="batch_delete">Batch Delete</span>
 
-The specified value has no primary value, GORM will perform a batch delete, it will delete all matched records
+If the specified value has no primary value, GORM will perform a batch delete, it will delete all matched records
 
 ```go
 db.Where("email LIKE ?", "%jinzhu%").Delete(&Email{})
@@ -78,7 +78,7 @@ db.Session(&gorm.Session{AllowGlobalUpdate: true}).Delete(&User{})
 
 ### Returning Data From Deleted Rows
 
-Return deleted data, only works for database support Returning, for example:
+Returning deleted data only works for databases which support Returning, for example:
 
 ```go
 // return all columns
